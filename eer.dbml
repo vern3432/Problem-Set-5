@@ -1,0 +1,33 @@
+Table Item {
+  ItemID INT [PK]
+  Name VARCHAR [Unique]
+  Quantity INT
+  Description TEXT
+  MagicID INT [FK]
+  DangerLevel INT
+  PurchasePrice DECIMAL
+  SellingPrice DECIMAL
+}
+
+Table Sales {
+  SaleID INT [PK]
+  ItemID INT [FK]
+  CustomerID INT [FK]
+  SaleDate DATE
+  SaleAmount DECIMAL
+}
+
+Table Customer {
+  CustomerID INT [PK]
+  Name VARCHAR
+  Age INT
+}
+
+Table Magic {
+  MagicID INT [PK]
+  MagicName VARCHAR
+}
+
+Ref: "Item"."MagicID" < "Magic"."MagicID"
+Ref: "Sales"."ItemID" < "Item"."ItemID"
+Ref: "Sales"."CustomerID" < "Customer"."CustomerID"

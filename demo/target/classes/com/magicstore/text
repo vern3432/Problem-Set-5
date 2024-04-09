@@ -1,0 +1,166 @@
+import java.sql.*;
+import java.util.Scanner;
+
+public class MagicalItemShopCLI {
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/invManagement";
+    private static final String DB_USER = "linuxuser3";
+    private static final String DB_PASSWORD = "password";
+    private static Connection connection;
+    private static Scanner scanner = new Scanner(System.in);
+
+    public MagicalItemShopCLI() {
+        createConnection();
+    }
+
+    private void createConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            System.out.println("Connected to the database!");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void closeConnection() {
+        try {
+            if (connection != null) {
+                connection.close();
+                System.out.println("Disconnected from the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayMenu() {
+        System.out.println("Welcome to William's Magical Item Shop!");
+        System.out.println("Choose an option:");
+        System.out.println("1. Purchase items from a customer");
+        System.out.println("2. View current inventory");
+        System.out.println("3. Save search results to a file");
+        System.out.println("4. Generate monthly sales report");
+        System.out.println("0. Exit");
+
+        int choice = getUserInput(0, 4);
+        switch (choice) {
+            case 1:
+                workflowOne();
+                break;
+            case 2:
+                workflowTwo();
+                break;
+            case 3:
+                workflowThree();
+                break;
+            case 4:
+                workflowFour();
+                break;
+            case 0:
+                closeConnection();
+                System.out.println("Exiting program. Goodbye!");
+                break;
+        }
+    }
+
+    private void workflowOne() {
+        System.out.println("Workflow One: Purchasing items from a customer");
+        // Implement logic for purchasing items from a customer
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Item");
+            while (resultSet.next()) {
+                int itemID = resultSet.getInt("ItemID");
+                String name = resultSet.getString("Name");
+                int quantity = resultSet.getInt("Quantity");
+                System.out.println("Item ID: " + itemID + ", Name: " + name + ", Quantity: " + quantity);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        displayMenu();
+    }
+
+    private void workflowTwo() {
+        System.out.println("Workflow Two: Viewing current inventory");
+        // Implement logic for viewing current inventory
+        System.out.println("Search Filters:");
+        System.out.println("1. Danger Level");
+        System.out.println("2. Magic Type");
+        System.out.println("3. Price");
+        System.out.println("0. Back to main menu");
+
+        int choice = getUserInput(0, 3);
+        switch (choice) {
+            case 1:
+                searchByDangerLevel();
+                break;
+            case 2:
+                searchByMagicType();
+                break;
+            case 3:
+                searchByPrice();
+                break;
+            case 0:
+                displayMenu();
+                break;
+        }
+    }
+
+    private void searchByDangerLevel() {
+        // Implement logic for searching by danger level
+        // Prompt the user for danger level input
+        // Execute the SQL query with the provided danger level
+        // Display the search results
+        displayMenu();
+    }
+
+    private void searchByMagicType() {
+        // Implement logic for searching by magic type
+        // Prompt the user for magic type input
+        // Execute the SQL query with the provided magic type
+        // Display the search results
+        displayMenu();
+    }
+
+    private void searchByPrice() {
+        // Implement logic for searching by price
+        // Prompt the user for price range input
+        // Execute the SQL query with the provided price range
+        // Display the search results
+        displayMenu();
+    }
+
+    private void workflowThree() {
+        System.out.println("Workflow Three: Saving search results to a file");
+        // Implement logic for saving search results to a file
+        displayMenu();
+    }
+
+    private void workflowFour() {
+        System.out.println("Workflow Four: Generating monthly sales report");
+        // Implement logic for generating monthly sales report
+        displayMenu();
+    }
+
+    private int getUserInput(int min, int max) {
+        int choice;
+        do {
+            System.out.print("Enter your choice: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                System.out.print("Enter your choice: ");
+                scanner.next(); // Consume invalid input
+            }
+            choice = scanner.nextInt();
+        } while (choice < min || choice > max);
+        return choice;
+    }
+
+    public static void main(String[] args) {
+        MagicalItemShopCLI shopCLI = new MagicalItemShopCLI();
+        shopCLI.displayMenu();
+    }
+}
