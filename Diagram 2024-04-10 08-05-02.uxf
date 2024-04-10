@@ -1,0 +1,59 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>530</x><y>290</y><w>560</w><h>450</h></coordinates><panel_attributes>[MagicalItemShopLogic]
+--
+- scanner: Scanner
+- DB_URL: String
+- DB_USER: String
+- DB_PASSWORD: String
+- connection: Connection
+- current_minimum_Danger: int
+- current_maximum_Danger: int
+- selected_minimum_Danger: int
+- selected_maximum_Danger: int
+- current_minimum_Price: double
+- current_maximum_Price: double
+- selected_minimum_Price: int
+- selected_maximum_Price: int
+- reset_search_flag: boolean
+- selectedMagic: ArrayList&lt;String&gt;
+- cli: MagicalItemShopPresentation
+- selectScanner: Scanner
+--
++ getConnection(): Connection
++ setConnection(Connection connection): void
++ MagicalItemShopLogic(MagicalItemShopPresentation cli)
++ createConnection(): void
++ closeConnection(): void
++ workflowOne(): void
++ workflowTwo(): void
++ workflowThree(): void
++ workflowFour(): void
++ getUserInput(int min, int max): int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>0</y><w>210</w><h>250</h></coordinates><panel_attributes>[MagicalItemShopPresentation]
+--
+- scanner: Scanner
+- logic: MagicalItemShopLogic
+--
++ MagicalItemShopPresentation()
++ start(): void
++ displayMenu(): void
+- getUserInput(int min, int max): int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>790</y><w>460</w><h>250</h></coordinates><panel_attributes>[MagicalItemShopUtils]
+--
++ getMinAndMaxDangerLevel(Connection connection): HashMap&lt;String, Integer&gt;
++ getAllUniqueMagic(Connection connection): ArrayList&lt;String&gt;
++ getMinAndMaxPrice(Connection connection): HashMap&lt;String, Double&gt;
++ searchItems(Connection connection, int minDanger, int maxDanger, ArrayList&lt;String&gt; magicTypes, double minPrice, double maxPrice): ArrayList&lt;String&gt;
++ purchaseItemsFromCustomer(Connection connection): void
++ generateMonthlySalesReport(Connection connection, String filename, int month, int year): void
++ main(String[] args): void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>60</y><w>210</w><h>70</h></coordinates><panel_attributes>[Main]
+--
++ main(String[] args): void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>780</x><y>730</y><w>80</w><h>80</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>770</x><y>240</y><w>80</w><h>70</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>90</y><w>220</w><h>50</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes><additional_attributes>10;10;200;30</additional_attributes></element></diagram>

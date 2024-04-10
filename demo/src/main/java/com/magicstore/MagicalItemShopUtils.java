@@ -188,19 +188,4 @@ public  void generateMonthlySalesReport(Connection connection, String filename, 
         }
     }
 
-
-    
-
-
-    public static void main(String[] args) {
-        // try {
-        //     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/invManagement", "linuxuser3", "password");
-        //     HashMap<String, Integer> dangerLevels = getMinAndMaxDangerLevel(connection);
-        //     System.out.println("Minimum Danger Level: " + dangerLevels.get("Min"));
-        //     System.out.println("Maximum Danger Level: " + dangerLevels.get("Max"));
-        //     connection.close();
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        // }
-    }
 }
